@@ -2,7 +2,7 @@ Pusher PHP Library (CI version)
 ===================
 
 This is a CodeIgniter version of the PHP library (https://github.com/squeeks/Pusher-PHP). 
-You can find full documentation on that project.
+You can find full documentation on that project there.
 
 
 How to use
