@@ -170,8 +170,8 @@ class Pusher
 		if($custom_data){
 		  $signature['channel_data'] = $custom_data;
 		}
-		return json_encode( $signature );
-
+		echo json_encode( $signature );
+		exit();
 	}
 
 	/**
