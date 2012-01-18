@@ -23,13 +23,10 @@
 		+ Anthoni Giskegjerde (twitter.com/antonigiske)
 */
 
-
-
 class Pusher
 {
-
+	private $CI;
 	private $settings = array ();
-
 	/**
 	* PHP5 Constructor. 
 	* 
@@ -44,15 +41,15 @@ class Pusher
 		$this->check_compatibility();
 
 		// Get Codeigniter instance, and config.
-		$CI = get_instance();
-		$CI->load->config('pusher');
+		$this->CI = get_instance();
+		$this->CI->load->config('pusher');
 
 		// Setup defaults
 		$this->settings['server']	= 'http://api.pusherapp.com';
 		$this->settings['port']		= '80';
-		$this->settings['auth_key']	= $CI->config->item('pusher_api_key');
-		$this->settings['secret']	= $CI->config->item('pusher_secret');
-		$this->settings['app_id']	= $CI->config->item('pusher_app_id');
+		$this->settings['auth_key']	= $this->CI->config->item('pusher_api_key');
+		$this->settings['secret']	= $this->CI->config->item('pusher_secret');
+		$this->settings['app_id']	= $this->CI->config->item('pusher_app_id');
 		$this->settings['url']		= '/apps/' . $this->settings['app_id'];
 		$this->settings['debug']	= false;
 		$this->settings['timeout']	= 30;
@@ -170,8 +167,7 @@ class Pusher
 		if($custom_data){
 		  $signature['channel_data'] = $custom_data;
 		}
-		echo json_encode( $signature );
-		exit();
+		$this->CI->output->set_content_type('application/json')->set_output(json_encode($signature));
 	}
 
 	/**
