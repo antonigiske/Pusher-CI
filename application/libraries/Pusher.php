@@ -76,7 +76,7 @@ class Pusher {
 	* @param int $port [optional]
 	* @param int $timeout [optional]
 	*/
-	public function __construct( $auth_key, $secret, $app_id, $debug = false, $host = 'http://api.pusherapp.com', $port = '80', $timeout = 30 ) {
+	public function __construct( $auth_key = '', $secret = '', $app_id = '', $debug = false, $host = 'http://api.pusherapp.com', $port = '80', $timeout = 30 ) {
 		// Check compatibility, disable for speed improvement
 		$this->check_compatibility();
 
