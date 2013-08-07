@@ -35,20 +35,7 @@ class PusherInstance {
 	private static $secret	= '';
 	private static $api_key = '';
 
-	//codeigniter instance variable
-	private $CI;
-
-	private function __construct() {
-
-		// Get Codeigniter instance, and config data
-		$this->CI = get_instance();
-		$this->CI->load->config('pusher');
-
-		// Setup defaults
-		$this->api_key 	= $this->CI->config->item('pusher_api_key');
-		$this->secret 	= $this->CI->config->item('pusher_secret');
-		$this->app_id	= $this->CI->config->item('pusher_app_id');
-	}
+	private function __construct() { }
 
 	private function __clone() { }
 
@@ -72,6 +59,9 @@ class Pusher {
 	private $settings = array ();
 	private $logger = null;
 
+	//codeigniter instance variable
+	private $CI;
+
 	/**
 	* PHP5 Constructor.
 	*
@@ -90,12 +80,16 @@ class Pusher {
 		// Check compatibility, disable for speed improvement
 		$this->check_compatibility();
 
+		// Get Codeigniter instance, and config data
+		$this->CI = get_instance();
+		$this->CI->load->config('pusher');
+
 		// Setup defaults
-		$this->settings['server'] = $host;
+		$this->settings['server'] 	= $host;
 		$this->settings['port']		= $port;
-		$this->settings['auth_key'] = $auth_key;
-		$this->settings['secret'] = $secret;
-		$this->settings['app_id'] = $app_id;
+		$this->settings['auth_key'] = $this->CI->config->item('pusher_api_key');
+		$this->settings['secret'] 	= $this->CI->config->item('pusher_secret');
+		$this->settings['app_id'] 	= $this->CI->config->item('pusher_app_id');
 		$this->settings['url']		= '/apps/' . $this->settings['app_id'];
 		$this->settings['debug']	= $debug;
 		$this->settings['timeout']	= $timeout;
