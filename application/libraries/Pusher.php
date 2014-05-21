@@ -85,14 +85,39 @@ class Pusher {
 		$this->CI->load->config('pusher');
 
 		// Setup defaults
-		$this->settings['server'] 	= $host;
-		$this->settings['port']		= $port;
-		$this->settings['auth_key'] = $this->CI->config->item('pusher_api_key');
+		$ciPusherHost = $this->CI->config->item('pusher_host');
+		if(!empty($ciPusherHost)) {
+			$this->settings['server'] 	= $ciPusherHost;
+		} else {
+			$this->settings['server']	= $host;
+		}
+		$ciPusherPort = $this->CI->config->item('pusher_port');
+		if(!empty($ciPusherPort)) {
+			$this->settings['port']		= $ciPusherPort;
+		} else {
+			$this->settings['port']		= $port;
+		}
+		$this->settings['auth_key'] 	= $this->CI->config->item('pusher_api_key');
 		$this->settings['secret'] 	= $this->CI->config->item('pusher_secret');
 		$this->settings['app_id'] 	= $this->CI->config->item('pusher_app_id');
-		$this->settings['url']		= '/apps/' . $this->settings['app_id'];
-		$this->settings['debug']	= $debug;
-		$this->settings['timeout']	= $timeout;
+		$ciPusherUrl = $this->CI->config->item('pusher_url');
+		if(!empty($ciPusherUrl)) {
+			$this->settings['url']		= $ciPusherUrl;
+		} else {
+			$this->settings['url']		= '/apps/' . $this->settings['app_id'];
+		}
+		$ciPusherDebug = $this->CI->config->item('pusher_debug');
+		if(!empty($ciPusherDebug)) {
+			$this->settings['debug']	= $ciPusherDebug;
+		} else {
+			$this->settings['debug']	= $debug;
+		}
+		$ciPusherTimeout = $this->CI->config->item('pusher_timeout');
+		if(!empty($ciPusherTimeout)) {
+			$this->settings['timeout']	= $ciPusherTimeout;
+		} else {
+			$this->settings['timeout']	= $timeout;
+		}
 
 	}
 
